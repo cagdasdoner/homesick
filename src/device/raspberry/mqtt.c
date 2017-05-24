@@ -5,6 +5,8 @@
 #include "global.h"
 #include "credentials.h"
 
+#define MQTT_DELAY_TOUT 5000
+
 MQTTClient client;
 volatile MQTTClient_deliveryToken deliveredtoken;
 
@@ -55,7 +57,7 @@ void MQTTSubscribe(const char* topic)
 
 void MQTTDisconnect()
 {
-    MQTTClient_disconnect(client, 10000);
+    MQTTClient_disconnect(client, MQTT_DELAY_TOUT);
     MQTTClient_destroy(&client);
 }
 
@@ -73,10 +75,10 @@ void MQTTBegin()
 
     MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered);
 
-    if ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
+    while ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
     {
         printf("Failed to connect, return code %d\n", rc);
-        exit(-1);       
+        sleep(MQTT_DELAY_TOUT); 
     }
 }
 

@@ -1,4 +1,5 @@
 #include <curl/curl.h>
+
 #include "global.h"
 #include "credentials.h"
 
