@@ -1,9 +1,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include <pthread.h>
 
 #include "camera.h"
+#include "credentials.h"
+#include "global.h"
 
 #define CAM_FILE "cam.jpg"
 

@@ -1,5 +1,6 @@
 #include "MQTTClient.h"
 #include "mqtt.h"
+#include "camera.h"
 #include "network.h"
 #include "global.h"
 #include "credentials.h"
